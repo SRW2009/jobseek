@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:jobseek/shared/app/utils/resources.dart';
+import 'package:jobseek/resources.dart';
 import 'package:jobseek/shared/app/widgets/controlled_slivers_builder.dart';
 
 import 'main_menu_controller.dart';
@@ -30,7 +30,7 @@ class _MainMenuState extends ViewState<MainMenuPage, MainMenuController> with _S
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Center(child: Image.asset(SharedResources.logo)),
+                Center(child: Image.asset(Assets.logo)),
                 Padding(
                   padding: padding.copyWith(top: 0),
                   child: Text(

@@ -12,6 +12,7 @@ import 'package:jobseek/jobseeker/app/pages/login/login_page.dart';
 import 'package:jobseek/jobseeker/app/pages/my-files/my_files_page.dart';
 import 'package:jobseek/jobseeker/app/pages/my-profile/my_profile_page.dart';
 import 'package:jobseek/jobseeker/app/pages/register/register_page.dart';
+import 'package:jobseek/jobseeker/domain/entities/job.dart';
 
 class JobSeekerRoute extends MaterialPageRoute {
   static const String _prefix = '/jobseeker';
@@ -42,7 +43,7 @@ class JobSeekerRoute extends MaterialPageRoute {
       case chooseSpecializationCategory: return const JobSeekerChooseSpecializationCategoryPage();
       case chooseSpecializationOccupation: return const JobSeekerChooseSpecializationOccupationPage();
       case availableJob: return const JobSeekerAvailableJobPage();
-      case jobDetail: return const JobSeekerJobDetailPage();
+      case jobDetail: return JobSeekerJobDetailPage(settings.arguments! as Job);
       case jobApply: return const JobSeekerJobApplyPage();
       case jobApplyDone: return const JobSeekerJobApplyDonePage();
       case login: default: return const JobSeekerLoginPage();
