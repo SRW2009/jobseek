@@ -29,7 +29,7 @@ class _CompanyLoginState extends ViewState<CompanyLoginPage, CompanyLoginControl
         SecondarySliverAppBar(
           label: 'For Job Seekers',
           onBackPressed: controller.onNavigateBack,
-          elevationValue: 0,
+          elevation: 0,
         ),
         SliverFillRemaining(
           hasScrollBody: false,

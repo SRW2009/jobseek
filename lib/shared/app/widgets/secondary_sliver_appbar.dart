@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class SecondarySliverAppBar extends SliverAppBar {
   final String label;
   final bool implyLeading;
-  final double? elevationValue;
   final Function()? onBackPressed;
 
-  const SecondarySliverAppBar({super.key, required this.label, this.implyLeading=true, this.onBackPressed, this.elevationValue});
+  const SecondarySliverAppBar({
+    super.key, required this.label, this.implyLeading=true,
+    this.onBackPressed, double? elevation, List<Widget>? actions,
+  }) : super(actions: actions, elevation: elevation);
 
   @override
   State<SliverAppBar> createState() => _SecondarySliverAppBarState();
@@ -24,7 +26,8 @@ class _SecondarySliverAppBarState extends State<SecondarySliverAppBar> {
         : null,
     automaticallyImplyLeading: false,
     title: Text(widget.label),
-    elevation: widget.elevationValue,
+    elevation: widget.elevation,
+    actions: widget.actions,
     pinned: true,
   );
 }

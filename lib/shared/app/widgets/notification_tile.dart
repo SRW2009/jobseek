@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:jobseek/shared/app/utils/date_formatter.dart';
 import 'package:jobseek/shared/domain/entities/notification.dart' as n;
-import 'package:jobseek/shared/app/widgets/primary_outlined_button.dart';
+import 'package:jobseek/shared/app/widgets/m_outlined_button.dart';
 
 class NotificationTile extends StatelessWidget {
   final String image;
@@ -39,7 +39,7 @@ class NotificationTile extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(message, maxLines: 2, overflow: TextOverflow.ellipsis),
-                  PrimaryOutlinedButton(
+                  MOutlinedButton(
                     onPressed: onSeeDetail,
                     child: const Text('see details'),
                   ),

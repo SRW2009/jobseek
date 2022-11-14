@@ -1,4 +1,5 @@
 
+import 'package:jobseek/jobseeker/domain/entities/file.dart';
 import 'package:jobseek/jobseeker/domain/entities/job.dart';
 import 'package:jobseek/resources.dart';
 import 'package:jobseek/shared/domain/entities/category.dart';
@@ -32,4 +33,11 @@ final notifications = [
   Notification(DateTime.now().subtract(const Duration(days: 5)), jobs[5]),
   Notification(DateTime.now().subtract(const Duration(days: 6)), jobs[6]),
   Notification(DateTime.now().subtract(const Duration(days: 7)), jobs[7]),
+];
+
+final files = [
+  File(0, 'CV', 'CV_Abyan Athar.pdf'),
+  File(1, 'Resume', 'Resume_Abyan Athar.pdf'),
+  File(2, 'Certification', 'Certificate_Abyan Athar.pdf'),
+  File(3, 'Motivation Letter', 'Motivation Letter_Abyan Athar.pdf')
 ];

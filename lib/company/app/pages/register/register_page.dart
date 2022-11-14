@@ -30,7 +30,7 @@ class _CompanyRegisterState extends ViewState<CompanyRegisterPage, CompanyRegist
         SecondarySliverAppBar(
           label: 'For Companies',
           onBackPressed: controller.onNavigateBack,
-          elevationValue: 0,
+          elevation: 0,
         ),
         SliverFillRemaining(
           hasScrollBody: false,

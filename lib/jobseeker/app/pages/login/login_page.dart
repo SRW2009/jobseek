@@ -28,7 +28,7 @@ class _JobSeekerLoginState extends ViewState<JobSeekerLoginPage, JobSeekerLoginC
         SecondarySliverAppBar(
           label: 'For Job Seekers',
           onBackPressed: controller.onNavigateBack,
-          elevationValue: 0,
+          elevation: 0,
         ),
         SliverFillRemaining(
           hasScrollBody: false,

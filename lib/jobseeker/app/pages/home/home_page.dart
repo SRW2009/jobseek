@@ -1,12 +1,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:jobseek/jobseeker/app/pages/home/ui/profile/ui_profile_page.dart';
 
 import 'home_controller.dart';
-import 'ui/job/ui_job_page.dart';
-import 'ui/notification/ui_notification_page.dart';
-import 'ui/search/ui_search_page.dart';
+import 'ui/job_ui.dart';
+import 'ui/search_ui.dart';
+import 'ui/notification_ui.dart';
+import 'ui/profile_ui.dart';
 
 class JobSeekerHomePage extends View {
   const JobSeekerHomePage({super.key});
@@ -42,11 +42,11 @@ class _JobSeekerHomeState extends ViewState<JobSeekerHomePage, JobSeekerHomeCont
     ),
   ];
 
-  final List<Widget> navPages = const [
-    JobSeekerHomeUIJobPage(),
-    JobSeekerHomeUISearchPage(),
-    JobSeekerHomeUINotificationPage(),
-    JobSeekerHomeUIProfilePage(),
+  List<Widget> navPages(JobSeekerHomeController controller) => [
+    JobSeekerHomeUIJob(controller),
+    JobSeekerHomeUISearch(controller),
+    JobSeekerHomeUINotification(controller),
+    JobSeekerHomeUIProfile(controller),
   ];
 
   @override
@@ -56,14 +56,14 @@ class _JobSeekerHomeState extends ViewState<JobSeekerHomePage, JobSeekerHomeCont
         builder: (context, controller) => PageView(
           controller: controller.pageController,
           physics: const NeverScrollableScrollPhysics(),
-          children: navPages,
+          children: navPages(controller),
         ),
     ),
     bottomNavigationBar: ControlledWidgetBuilder<JobSeekerHomeController>(
       builder: (context, controller) => BottomNavigationBar(
         currentIndex: controller.activePageIndex,
         items: navItems,
-        onTap: controller.onTapNavItem,
+        onTap: controller.onSelectNavItem,
         showSelectedLabels: false,
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,

@@ -8,20 +8,24 @@ class TextInputField extends StatelessWidget {
   final bool obscure;
   final bool required;
   final bool enabled;
+  final bool readOnly;
   final TextInputType? inputType;
   final String? Function(String? s)? validator;
+  final Widget? suffixIcon;
 
   const TextInputField({
-    Key? key,
+    super.key,
     required this.controller,
     this.hint,
     this.initialValue,
     this.obscure=false,
     this.required=false,
     this.enabled=true,
+    this.readOnly=false,
     this.inputType,
     this.validator,
-  }) : super(key: key);
+    this.suffixIcon,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +60,9 @@ class TextInputField extends StatelessWidget {
                 controller: controller,
                 obscureText: obscure,
                 keyboardType: inputType,
+                readOnly: readOnly,
                 decoration: InputDecoration(
+                  suffixIcon: suffixIcon,
                   filled: true,
                   fillColor: enabled
                       ? Theme.of(context).colorScheme.tertiary

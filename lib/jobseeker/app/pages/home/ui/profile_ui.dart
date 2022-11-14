@@ -1,27 +1,25 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:jobseek/jobseeker/app/pages/home/home_controller.dart';
 import 'package:jobseek/shared/app/widgets/default_tile.dart';
-import 'package:jobseek/resources.dart';
-import 'package:jobseek/shared/app/widgets/controlled_slivers_builder.dart';
-import 'package:jobseek/shared/app/widgets/primary_outlined_button.dart';
+import 'package:jobseek/shared/app/widgets/m_outlined_button.dart';
 import 'package:jobseek/shared/app/widgets/primary_sliver_appbar.dart';
+import 'package:jobseek/resources.dart';
 
-import 'ui_profile_controller.dart';
+class JobSeekerHomeUIProfile extends StatefulWidget {
+  final JobSeekerHomeController controller;
 
-class JobSeekerHomeUIProfilePage extends View {
-  const JobSeekerHomeUIProfilePage({super.key});
+  const JobSeekerHomeUIProfile(this.controller, {super.key});
 
   @override
   State<StatefulWidget> createState() => _JobSeekerUIProfileState();
 }
 
-class _JobSeekerUIProfileState extends ViewState<JobSeekerHomeUIProfilePage, JobSeekerHomeUIProfileController> {
-  _JobSeekerUIProfileState() : super(JobSeekerHomeUIProfileController());
+class _JobSeekerUIProfileState extends State<JobSeekerHomeUIProfile> {
 
   @override
-  Widget get view => ControlledSliversBuilder<JobSeekerHomeUIProfileController>(
-    sliversBuilder: (context, controller) => [
+  Widget build(BuildContext context) => CustomScrollView(
+    slivers: [
       const PrimarySliverAppBar(
         label: 'Profile',
         implyLeading: false,
@@ -56,17 +54,17 @@ class _JobSeekerUIProfileState extends ViewState<JobSeekerHomeUIProfilePage, Job
               ListTile(
                 leading: const Icon(Icons.person),
                 title: const Text('My Profile'),
-                onTap: () {},
+                onTap: widget.controller.onNavigateMyProfile,
               ),
               ListTile(
                 leading: const Icon(Icons.check_circle),
                 title: const Text('Identity Verification'),
-                onTap: () {},
+                onTap: widget.controller.onNavigateIdentityVerification,
               ),
               ListTile(
                 leading: const Icon(Icons.folder),
                 title: const Text('My Files'),
-                onTap: () {},
+                onTap: widget.controller.onNavigateMyFiles,
               ),
               ListTile(
                 leading: const Icon(Icons.work),
@@ -91,7 +89,7 @@ class _JobSeekerUIProfileState extends ViewState<JobSeekerHomeUIProfilePage, Job
               Padding(
                 padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Center(
-                  child: PrimaryOutlinedButton(
+                  child: MOutlinedButton(
                     onPressed: () {  },
                     minWidth: 160,
                     child: const Text('Sign Out'),

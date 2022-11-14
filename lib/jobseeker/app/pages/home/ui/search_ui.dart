@@ -1,26 +1,24 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:jobseek/jobseeker/app/pages/home/home_controller.dart';
 import 'package:jobseek/shared/app/widgets/category_card.dart';
-import 'package:jobseek/shared/app/widgets/controlled_slivers_builder.dart';
 import 'package:jobseek/shared/app/widgets/primary_sliver_appbar.dart';
 import 'package:jobseek/shared/app/widgets/searchbar.dart';
 
-import 'ui_search_controller.dart';
+class JobSeekerHomeUISearch extends StatefulWidget {
+  final JobSeekerHomeController controller;
 
-class JobSeekerHomeUISearchPage extends View {
-  const JobSeekerHomeUISearchPage({super.key});
+  const JobSeekerHomeUISearch(this.controller, {super.key});
 
   @override
   State<StatefulWidget> createState() => _JobSeekerUISearchState();
 }
 
-class _JobSeekerUISearchState extends ViewState<JobSeekerHomeUISearchPage, JobSeekerHomeUISearchController> {
-  _JobSeekerUISearchState() : super(JobSeekerHomeUISearchController());
+class _JobSeekerUISearchState extends State<JobSeekerHomeUISearch> {
 
   @override
-  Widget get view => ControlledSliversBuilder<JobSeekerHomeUISearchController>(
-    sliversBuilder: (context, controller) => [
+  Widget build(BuildContext context) => CustomScrollView(
+    slivers: [
       const PrimarySliverAppBar(
         label: 'Find a Job',
         implyLeading: false,
@@ -29,7 +27,7 @@ class _JobSeekerUISearchState extends ViewState<JobSeekerHomeUISearchPage, JobSe
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20.0),
         sliver: SliverToBoxAdapter(
           child: SearchBar(
-            onChanged: controller.onSearchChanged,
+            onChanged: widget.controller.onSearchChanged,
             hint: 'Search',
           ),
         ),
@@ -50,11 +48,14 @@ class _JobSeekerUISearchState extends ViewState<JobSeekerHomeUISearchPage, JobSe
         padding: const EdgeInsets.symmetric(horizontal: 16),
         sliver: SliverList(
           delegate: SliverChildBuilderDelegate(
-            (context, index) => CategoryCard(
-              controller.categories[index],
-              onTap: () => controller.onSelectCategory(controller.categories[index]),
-            ),
-            childCount: controller.categories.length,
+            (context, index) {
+              final category = widget.controller.categories[index];
+              return CategoryCard(
+                category,
+                onTap: () => widget.controller.onSelectCategory(category),
+              );
+            },
+            childCount: widget.controller.categories.length,
           ),
         ),
       ),

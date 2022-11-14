@@ -31,7 +31,7 @@ class DefaultTile extends StatelessWidget {
             if (image!=null) CircleImage(imageRadius, image!),
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.only(left: 14.0),
+                padding: EdgeInsets.only(left: (image!=null) ? 14 : 0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -1,25 +1,23 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:jobseek/jobseeker/app/pages/home/home_controller.dart';
 import 'package:jobseek/shared/app/widgets/default_tile.dart';
-import 'package:jobseek/shared/app/widgets/controlled_slivers_builder.dart';
 import 'package:jobseek/shared/app/widgets/primary_sliver_appbar.dart';
 
-import 'ui_job_controller.dart';
+class JobSeekerHomeUIJob extends StatefulWidget {
+  final JobSeekerHomeController controller;
 
-class JobSeekerHomeUIJobPage extends View {
-  const JobSeekerHomeUIJobPage({super.key});
+  const JobSeekerHomeUIJob(this.controller, {super.key});
 
   @override
   State<StatefulWidget> createState() => _JobSeekerUIJobState();
 }
 
-class _JobSeekerUIJobState extends ViewState<JobSeekerHomeUIJobPage, JobSeekerHomeUIJobController> {
-  _JobSeekerUIJobState() : super(JobSeekerHomeUIJobController());
+class _JobSeekerUIJobState extends State<JobSeekerHomeUIJob> {
 
   @override
-  Widget get view => ControlledSliversBuilder<JobSeekerHomeUIJobController>(
-    sliversBuilder: (context, controller) => [
+  Widget build(BuildContext context) => CustomScrollView(
+    slivers: [
       const PrimarySliverAppBar(
         label: 'Job Recommendation',
         implyLeading: false,
@@ -27,16 +25,16 @@ class _JobSeekerUIJobState extends ViewState<JobSeekerHomeUIJobPage, JobSeekerHo
       SliverList(
         delegate: SliverChildBuilderDelegate(
           (context, index) {
-            final job = controller.jobs[index];
+            final job = widget.controller.jobs[index];
             return DefaultTile(
               title: job.occupation,
               subtitle: job.companyName,
               // TODO: fetch image from network
               image: Image.asset(job.image, fit: BoxFit.fitHeight),
-              onTap: () => controller.onNavigateJobDetail(job),
+              onTap: () => widget.controller.onNavigateJobDetail(job),
             );
           },
-          childCount: controller.jobs.length,
+          childCount: widget.controller.jobs.length,
         ),
       ),
     ],
