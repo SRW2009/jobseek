@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:jobseek/jobseeker/app/pages/available-job/available_job_page.dart';
-import 'package:jobseek/jobseeker/app/pages/choose-specialization-category/choose_specialization_category_page.dart';
-import 'package:jobseek/jobseeker/app/pages/choose-specialization-occupation/choose_specialization_occupation_page.dart';
+import 'package:jobseek/jobseeker/app/pages/choose-specialization/choose_specialization_page.dart';
+import 'package:jobseek/jobseeker/app/pages/choose-occupation/choose_occupation_page.dart';
 import 'package:jobseek/jobseeker/app/pages/home/home_page.dart';
 import 'package:jobseek/jobseeker/app/pages/identity-verification/identity_verification_page.dart';
 import 'package:jobseek/jobseeker/app/pages/job-apply-done/job_apply_done_page.dart';
@@ -12,7 +12,7 @@ import 'package:jobseek/jobseeker/app/pages/login/login_page.dart';
 import 'package:jobseek/jobseeker/app/pages/my-files/my_files_page.dart';
 import 'package:jobseek/jobseeker/app/pages/my-profile/my_profile_page.dart';
 import 'package:jobseek/jobseeker/app/pages/register/register_page.dart';
-import 'package:jobseek/jobseeker/domain/entities/job.dart';
+import 'package:jobseek/shared/domain/entities/job.dart';
 
 class JobSeekerRoute extends MaterialPageRoute {
   static const String _prefix = '/jobseeker';
@@ -22,8 +22,8 @@ class JobSeekerRoute extends MaterialPageRoute {
   static const String myProfile = '$_prefix/my/profile';
   static const String myFiles = '$_prefix/my/files';
   static const String identityVerification = '$_prefix/identity-verification';
-  static const String chooseSpecializationCategory = '$_prefix/choose-specialization/category';
-  static const String chooseSpecializationOccupation = '$_prefix/choose-specialization/occupation';
+  static const String chooseSpecialization = '$_prefix/choose/specialization';
+  static const String chooseOccupation = '$_prefix/choose/occupation';
   static const String availableJob = '$_prefix/available-job';
   static const String jobDetail = '$_prefix/job';
   static const String jobApply = '$_prefix/job/apply';
@@ -40,12 +40,12 @@ class JobSeekerRoute extends MaterialPageRoute {
       case myProfile: return const JobSeekerMyProfilePage();
       case myFiles: return const JobSeekerMyFilesPage();
       case identityVerification: return const JobSeekerIdentityVerificationPage();
-      case chooseSpecializationCategory: return const JobSeekerChooseSpecializationCategoryPage();
-      case chooseSpecializationOccupation: return const JobSeekerChooseSpecializationOccupationPage();
+      case chooseSpecialization: return const JobSeekerChooseSpecializationPage();
+      case chooseOccupation: return const JobSeekerChooseOccupationPage();
       case availableJob: return const JobSeekerAvailableJobPage();
       case jobDetail: return JobSeekerJobDetailPage(settings.arguments! as Job);
-      case jobApply: return const JobSeekerJobApplyPage();
-      case jobApplyDone: return const JobSeekerJobApplyDonePage();
+      case jobApply: return JobSeekerJobApplyPage(settings.arguments! as Job);
+      case jobApplyDone: return JobSeekerJobApplyDonePage(settings.arguments! as String);
       case login: default: return const JobSeekerLoginPage();
     }
   }

@@ -1,7 +1,7 @@
 
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:jobseek/jobseeker/data/dummies.dart' as d;
-import 'package:jobseek/jobseeker/domain/entities/file.dart';
+import 'package:jobseek/shared/domain/entities/file.dart';
 
 class JobSeekerMyFilesController extends Controller {
   // TODO: fetch data from internet

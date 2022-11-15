@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:jobseek/jobseeker/domain/entities/job.dart';
+import 'package:jobseek/shared/domain/entities/job.dart';
 import 'package:jobseek/shared/app/widgets/controlled_slivers_builder.dart';
 import 'package:jobseek/shared/app/widgets/primary_elevated_button.dart';
 import 'package:jobseek/shared/app/widgets/primary_sliver_appbar.dart';
@@ -122,7 +122,7 @@ class _JobSeekerJobDetailState extends ViewState<JobSeekerJobDetailPage, JobSeek
                   padding: const EdgeInsets.all(16.0),
                   child: Center(
                     child: PrimaryElevatedButton(
-                      onPressed: controller.onApplyJob,
+                      onPressed: () => controller.onApplyJob(widget.job),
                       child: const Text('Apply this Job'),
                     ),
                   ),

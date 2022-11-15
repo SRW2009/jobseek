@@ -5,14 +5,20 @@ import 'package:jobseek/shared/domain/entities/category.dart';
 class CategoryCard extends StatelessWidget {
   final Category item;
   final Function()? onTap;
+  final bool selected;
 
-  const CategoryCard(this.item, {super.key, this.onTap});
+  const CategoryCard(this.item, {
+    super.key,
+    this.onTap,
+    this.selected=false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
       clipBehavior: Clip.antiAlias,
+      color: (selected) ? Theme.of(context).splashColor : null,
       child: InkWell(
         onTap: onTap,
         child: Row(

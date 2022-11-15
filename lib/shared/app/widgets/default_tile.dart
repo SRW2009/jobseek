@@ -8,6 +8,7 @@ class DefaultTile extends StatelessWidget {
   final Image? image;
   final double imageRadius;
   final Function()? onTap;
+  final bool selected;
 
   const DefaultTile({
     super.key,
@@ -16,14 +17,19 @@ class DefaultTile extends StatelessWidget {
     this.image,
     this.onTap,
     this.imageRadius=70,
+    this.selected=false,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16).copyWith(top: 16),
+      decoration: ShapeDecoration(
+        color: (selected) ? Theme.of(context).splashColor : null,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
+      ),
       child: InkWell(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(40),
         onTap: onTap,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,

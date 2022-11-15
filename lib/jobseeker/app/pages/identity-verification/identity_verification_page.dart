@@ -40,35 +40,23 @@ class _JobSeekerIdentityVerificationState extends ViewState<JobSeekerIdentityVer
                     controller: controller.idCardNumberController,
                     required: true,
                   ),
-                  TextInputField(
+                  TextInputField.filePick(
                     hint: 'ID Card Photo',
                     controller: controller.idCardPhotoController,
+                    onPick: controller.onPickIdCardPhoto,
                     required: true,
-                    readOnly: true,
-                    suffixIcon: GestureDetector(
-                      onTap: controller.onPickIdCardPhoto,
-                      child: const Icon(Icons.upload),
-                    ),
                   ),
-                  TextInputField(
+                  TextInputField.filePick(
                     hint: 'Your Selfies',
                     controller: controller.selfieController,
+                    onPick: controller.onPickSelfiePhoto,
                     required: true,
-                    readOnly: true,
-                    suffixIcon: GestureDetector(
-                      onTap: controller.onPickSelfiePhoto,
-                      child: const Icon(Icons.upload),
-                    ),
                   ),
-                  TextInputField(
+                  TextInputField.filePick(
                     hint: 'Your Selfies with ID Card',
                     controller: controller.selfieWithIdCardController,
+                    onPick: controller.onPickSelfieWithIdCardPhoto,
                     required: true,
-                    readOnly: true,
-                    suffixIcon: GestureDetector(
-                      onTap: controller.onPickSelfieWithIdCardPhoto,
-                      child: const Icon(Icons.upload),
-                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 16.0),

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class PrimaryElevatedButton extends StatelessWidget {
   final Function()? onPressed;
   final Widget child;
-  final int minWidth;
+  final double minWidth;
   final bool _isRound;
 
   const PrimaryElevatedButton({super.key, required this.onPressed, required this.child, this.minWidth=10}) : _isRound = false;
@@ -23,7 +23,7 @@ class PrimaryElevatedButton extends StatelessWidget {
           fontSize: 18,
           fontWeight: FontWeight.w600,
         )),
-        minimumSize: MaterialStateProperty.all(Size(_isRound ? 42 : 10, 42)),
+        minimumSize: MaterialStateProperty.all(Size(minWidth, 42)),
       ),
       onPressed: onPressed,
       child: child,

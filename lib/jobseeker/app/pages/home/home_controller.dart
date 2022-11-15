@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:jobseek/jobseeker/app/route.dart';
-import 'package:jobseek/jobseeker/domain/entities/job.dart';
+import 'package:jobseek/shared/domain/entities/job.dart';
 import 'package:jobseek/jobseeker/data/dummies.dart' as d;
 import 'package:jobseek/shared/domain/entities/category.dart';
 
