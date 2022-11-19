@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:jobseek/resources.dart';
 import 'package:jobseek/shared/app/widgets/controlled_slivers_builder.dart';
-import 'package:jobseek/shared/app/widgets/default_tile.dart';
+import 'package:jobseek/shared/app/widgets/splash_tile.dart';
 import 'package:jobseek/shared/app/widgets/form_field/text_input_field.dart';
 import 'package:jobseek/shared/app/widgets/primary_elevated_button.dart';
 import 'package:jobseek/shared/app/widgets/primary_sliver_appbar.dart';
@@ -41,7 +41,7 @@ class _JobSeekerJobApplyState extends ViewState<JobSeekerJobApplyPage, JobSeeker
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                DefaultTile(
+                SplashTile(
                   title: 'Abyan Athar',
                   subtitle: 'Balikpapan, Kalimantan Timur',
                   // TODO: fetch image from network

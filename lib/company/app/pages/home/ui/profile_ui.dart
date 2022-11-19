@@ -1,22 +1,22 @@
 
 import 'package:flutter/material.dart';
-import 'package:jobseek/shared/app/widgets/splash_tile.dart';
+import 'package:jobseek/resources.dart';
 import 'package:jobseek/shared/app/widgets/m_outlined_button.dart';
 import 'package:jobseek/shared/app/widgets/primary_sliver_appbar.dart';
-import 'package:jobseek/resources.dart';
+import 'package:jobseek/shared/app/widgets/splash_tile.dart';
 
 import '../home_controller.dart';
 
-class JobSeekerHomeUIProfile extends StatefulWidget {
-  final JobSeekerHomeController controller;
+class CompanyHomeUIProfile extends StatefulWidget {
+  final CompanyHomeController controller;
 
-  const JobSeekerHomeUIProfile(this.controller, {super.key});
+  const CompanyHomeUIProfile(this.controller, {super.key});
 
   @override
-  State<StatefulWidget> createState() => _JobSeekerUIProfileState();
+  State<StatefulWidget> createState() => _CompanyUIProfileState();
 }
 
-class _JobSeekerUIProfileState extends State<JobSeekerHomeUIProfile> {
+class _CompanyUIProfileState extends State<CompanyHomeUIProfile> {
 
   @override
   Widget build(BuildContext context) => CustomScrollView(
@@ -33,7 +33,7 @@ class _JobSeekerUIProfileState extends State<JobSeekerHomeUIProfile> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SplashTile(
-                title: 'Abyan Athar',
+                title: 'Jobseek co.',
                 subtitle: 'Balikpapan, Kalimantan Timur',
                 // TODO: fetch image from network
                 image: Image.asset(Assets.logo, fit: BoxFit.fitHeight),
@@ -54,22 +54,17 @@ class _JobSeekerUIProfileState extends State<JobSeekerHomeUIProfile> {
             [
               ListTile(
                 leading: const Icon(Icons.person),
-                title: const Text('My Profile'),
+                title: const Text('Company Profile'),
                 onTap: widget.controller.onNavigateMyProfile,
               ),
               ListTile(
                 leading: const Icon(Icons.check_circle),
-                title: const Text('Identity Verification'),
+                title: const Text('Company Verification'),
                 onTap: widget.controller.onNavigateIdentityVerification,
               ),
               ListTile(
-                leading: const Icon(Icons.folder),
-                title: const Text('My Files'),
-                onTap: widget.controller.onNavigateMyFiles,
-              ),
-              ListTile(
                 leading: const Icon(Icons.work),
-                title: const Text('My Jobs'),
+                title: const Text('Job Vacancy'),
                 onTap: () {},
               ),
               ListTile(

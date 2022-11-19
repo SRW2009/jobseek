@@ -1,17 +1,25 @@
 
 import 'package:flutter/material.dart';
 import 'package:jobseek/shared/app/utils/date_formatter.dart';
-import 'package:jobseek/shared/domain/entities/notification.dart' as n;
 import 'package:jobseek/shared/app/widgets/m_outlined_button.dart';
 
-class NotificationTile extends StatelessWidget {
+class SeeDetailTile extends StatelessWidget {
   final String image;
-  final String message;
-  final DateTime notifiedAt;
-  final n.Notification item;
+  final String? title;
+  final Widget child;
+  final DateTime? time;
   final Function()? onSeeDetail;
+  final Function()? onMore;
 
-  const NotificationTile(this.item, {Key? key, required this.image, required this.message, required this.notifiedAt, this.onSeeDetail}) : super(key: key);
+  const SeeDetailTile({
+    super.key,
+    required this.image,
+    required this.child,
+    this.time,
+    this.title,
+    this.onSeeDetail,
+    this.onMore,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +46,11 @@ class NotificationTile extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(message, maxLines: 2, overflow: TextOverflow.ellipsis),
+                  if (title!=null) Text(title!, style: const TextStyle(fontWeight: FontWeight.bold)),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 4),
+                    child: child,
+                  ),
                   MOutlinedButton(
                     onPressed: onSeeDetail,
                     child: const Text('see details'),
@@ -50,13 +62,15 @@ class NotificationTile extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 18),
             child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(DateFormatter.toApproximateTime(notifiedAt)),
+                if (time!=null) Text(DateFormatter.toApproximateTime(time!)),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
                   child: InkWell(
-                    onTap: () {},
+                    onTap: onMore,
                     borderRadius: BorderRadius.circular(20),
                     child: const Icon(Icons.more_vert),
                   ),

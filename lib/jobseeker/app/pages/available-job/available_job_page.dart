@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:jobseek/shared/app/widgets/controlled_slivers_builder.dart';
-import 'package:jobseek/shared/app/widgets/default_tile.dart';
+import 'package:jobseek/shared/app/widgets/splash_tile.dart';
 import 'package:jobseek/shared/app/widgets/next_fab.dart';
 import 'package:jobseek/shared/app/widgets/primary_sliver_appbar.dart';
 
@@ -35,7 +35,7 @@ class _JobSeekerAvailableJobState extends ViewState<JobSeekerAvailableJobPage, J
             delegate: SliverChildBuilderDelegate(
               (context, index) {
                 final job = controller.jobs[index];
-                return DefaultTile(
+                return SplashTile(
                   key: ValueKey("$index${controller.selectedIndex==index}"),
                   title: job.occupation,
                   subtitle: job.companyName,

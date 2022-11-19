@@ -12,6 +12,11 @@ class SillySliverAppBar extends SliverAppBar {
     this.onBackPressed, double? elevation, List<Widget>? actions,
   }) : super(actions: actions, elevation: elevation);
 
+  const SillySliverAppBar.secondary({
+    super.key, required this.label,
+    this.onBackPressed, double? elevation, List<Widget>? actions,
+  }) : super(actions: actions, elevation: elevation);
+
   @override
   State<SliverAppBar> createState() => _SillySliverAppBarState();
 }
@@ -35,8 +40,9 @@ class _SillySliverAppBarState extends State<SillySliverAppBar> {
                   Positioned(
                     left: -20,
                     bottom: 0,
-                    child: PrimaryElevatedButton.round(
-                      minWidth: 200,
+                    child: PrimaryElevatedButton(
+                      minWidth: 50,
+                      horizontalPadding: 20,
                       onPressed: widget.onBackPressed ?? () => Navigator.pop(context),
                       child: Row(
                         mainAxisSize: MainAxisSize.min,

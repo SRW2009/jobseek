@@ -2,39 +2,29 @@
 import 'package:flutter/material.dart';
 import 'package:jobseek/shared/app/widgets/category_card.dart';
 import 'package:jobseek/shared/app/widgets/primary_sliver_appbar.dart';
-import 'package:jobseek/shared/app/widgets/searchbar.dart';
 
 import '../home_controller.dart';
 
-class JobSeekerHomeUISearch extends StatefulWidget {
-  final JobSeekerHomeController controller;
+class CompanyHomeUISearch extends StatefulWidget {
+  final CompanyHomeController controller;
 
-  const JobSeekerHomeUISearch(this.controller, {super.key});
+  const CompanyHomeUISearch(this.controller, {super.key});
 
   @override
-  State<StatefulWidget> createState() => _JobSeekerUISearchState();
+  State<StatefulWidget> createState() => _CompanyUISearchState();
 }
 
-class _JobSeekerUISearchState extends State<JobSeekerHomeUISearch> {
+class _CompanyUISearchState extends State<CompanyHomeUISearch> {
 
   @override
   Widget build(BuildContext context) => CustomScrollView(
     slivers: [
       const PrimarySliverAppBar(
-        label: 'Find a Job',
+        label: 'Looking for Workers',
         implyLeading: false,
       ),
       SliverPadding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20.0),
-        sliver: SliverToBoxAdapter(
-          child: SearchBar(
-            onChanged: widget.controller.onSearchChanged,
-            hint: 'Search',
-          ),
-        ),
-      ),
-      SliverPadding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         sliver: SliverToBoxAdapter(
           child: Text(
             'Category',

@@ -49,13 +49,13 @@ class _JobSeekerIdentityVerificationState extends ViewState<JobSeekerIdentityVer
                   TextInputField.filePick(
                     hint: 'Your Selfies',
                     controller: controller.selfieController,
-                    onPick: controller.onPickSelfiePhoto,
+                    onPick: controller.onPickSelfie,
                     required: true,
                   ),
                   TextInputField.filePick(
                     hint: 'Your Selfies with ID Card',
                     controller: controller.selfieWithIdCardController,
-                    onPick: controller.onPickSelfieWithIdCardPhoto,
+                    onPick: controller.onPickSelfieWithIdCard,
                     required: true,
                   ),
                   Padding(

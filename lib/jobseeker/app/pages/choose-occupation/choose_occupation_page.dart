@@ -32,7 +32,7 @@ class _JobSeekerChooseSpecializationOccupationState extends ViewState<JobSeekerC
             actions: [
               PrimaryElevatedButton.round(
                 onPressed: controller.onNavigateHome,
-                minWidth: 50,
+                horizontalPadding: 12,
                 child: const Icon(Icons.home),
               ),
             ],

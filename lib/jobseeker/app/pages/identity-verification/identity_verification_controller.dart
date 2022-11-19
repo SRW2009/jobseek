@@ -46,7 +46,7 @@ class JobSeekerIdentityVerificationController extends Controller {
     }
   }
 
-  void onPickSelfiePhoto() async {
+  void onPickSelfie() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
     if (result != null) {
       pickedSelfiePhoto = result.files.first;
@@ -55,7 +55,7 @@ class JobSeekerIdentityVerificationController extends Controller {
     }
   }
 
-  void onPickSelfieWithIdCardPhoto() async {
+  void onPickSelfieWithIdCard() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
     if (result != null) {
       pickedSelfieWithIdCardPhoto = result.files.first;

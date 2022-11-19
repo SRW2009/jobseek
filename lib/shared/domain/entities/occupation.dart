@@ -7,6 +7,11 @@ class Occupation {
   final String title;
   final Specialization specialization;
 
-  Occupation(//this.id,
+  const Occupation(//this.id,
       this.image, this.title, this.specialization);
+
+  const Occupation.none()
+      : image = '',
+        title = '',
+        specialization = const Specialization.none();
 }

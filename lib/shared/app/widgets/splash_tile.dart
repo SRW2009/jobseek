@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:jobseek/shared/app/widgets/circle_image.dart';
 
-class DefaultTile extends StatelessWidget {
+class SplashTile extends StatelessWidget {
   final String title;
   final String subtitle;
   final Image? image;
@@ -10,7 +10,7 @@ class DefaultTile extends StatelessWidget {
   final Function()? onTap;
   final bool selected;
 
-  const DefaultTile({
+  const SplashTile({
     super.key,
     required this.title,
     required this.subtitle,

@@ -1,8 +1,9 @@
 
 import 'package:flutter/material.dart';
-import 'package:jobseek/jobseeker/app/pages/home/home_controller.dart';
-import 'package:jobseek/shared/app/widgets/notification_tile.dart';
+import 'package:jobseek/shared/app/widgets/see_detail_tile.dart';
 import 'package:jobseek/shared/app/widgets/primary_sliver_appbar.dart';
+
+import '../home_controller.dart';
 
 class JobSeekerHomeUINotification extends StatefulWidget {
   final JobSeekerHomeController controller;
@@ -26,12 +27,15 @@ class _JobSeekerUINotificationState extends State<JobSeekerHomeUINotification> {
         delegate: SliverChildBuilderDelegate(
           (context, index) {
             final notification = widget.controller.notifications[index];
-            return NotificationTile(
-              notification,
+            return SeeDetailTile(
               image: notification.detail.image,
-              message: 'You have successfully applied to the ${notification.detail.companyName}.',
-              notifiedAt: notification.notifiedAt,
+              time: notification.notifiedAt,
               onSeeDetail: () => widget.controller.onNavigateJobDetail(notification.detail),
+              child: Text(
+                'You have successfully applied to the ${notification.detail.companyName}.',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+              ),
             );
           },
           childCount: widget.controller.notifications.length,

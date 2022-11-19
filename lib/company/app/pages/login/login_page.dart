@@ -27,7 +27,7 @@ class _CompanyLoginState extends ViewState<CompanyLoginPage, CompanyLoginControl
     body: ControlledSliversBuilder<CompanyLoginController>(
       sliversBuilder: (context, controller) => [
         SecondarySliverAppBar(
-          label: 'For Job Seekers',
+          label: 'For Companies',
           onBackPressed: controller.onNavigateBack,
           elevation: 0,
         ),

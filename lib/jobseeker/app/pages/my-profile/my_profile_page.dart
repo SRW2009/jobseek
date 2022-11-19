@@ -8,12 +8,14 @@ import 'package:jobseek/shared/app/widgets/form_field/read_only_text_field.dart'
 import 'package:jobseek/shared/app/widgets/m_outlined_button.dart';
 import 'package:jobseek/shared/app/widgets/primary_elevated_button.dart';
 import 'package:jobseek/shared/app/widgets/secondary_sliver_appbar.dart';
-import 'package:jobseek/resources.dart';
+import 'package:jobseek/shared/domain/entities/applier.dart';
 
 import 'my_profile_controller.dart';
 
 class JobSeekerMyProfilePage extends View {
-  const JobSeekerMyProfilePage({super.key});
+  final Applier? applier;
+
+  const JobSeekerMyProfilePage(this.applier, {super.key});
 
   @override
   State<StatefulWidget> createState() => _JobSeekerMyProfileState();
@@ -28,10 +30,10 @@ class _JobSeekerMyProfileState extends ViewState<JobSeekerMyProfilePage, JobSeek
     key: globalKey,
     body: ControlledSliversBuilder<JobSeekerMyProfileController>(
       sliversBuilder: (context, controller) => [
-        const SecondarySliverAppBar(
-          label: 'My Profile',
+        SecondarySliverAppBar(
+          label: (widget.applier!=null) ? 'Worker Profile' : 'My Profile',
         ),
-        SliverPadding(
+        if (controller.applier!=null) SliverPadding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),
           sliver: SliverList(
             delegate: SliverChildListDelegate(
@@ -42,40 +44,36 @@ class _JobSeekerMyProfileState extends ViewState<JobSeekerMyProfilePage, JobSeek
                     child: Stack(
                       children: [
                         CircleImage(
-                          120, Image.asset(Assets.logo, fit: BoxFit.fitHeight,),
+                          120, Image.asset(controller.applier!.image, fit: BoxFit.fitHeight,),
                         ),
-                        Positioned(
+                        if (controller.editable) Positioned(
                           right: 0, bottom: 0,
                           child: PrimaryElevatedButton.round(
                             onPressed: controller.onEditImage,
-                            minWidth: 0,
-                            child: const Icon(Icons.edit_outlined),
+                            radius: 26,
+                            child: const Icon(Icons.edit_outlined, size: 18,),
                           ),
                         ),
                       ],
                     ),
                   ),
                 ),
-                const ReadOnlyTextField(
+                ReadOnlyTextField(
                   label: 'Name',
-                  value: 'Abyan Athar',
+                  value: controller.applier!.name,
                 ),
-                const ReadOnlyTextField(
+                ReadOnlyTextField(
                   label: 'Email',
-                  value: 'abyanathar@gmail.com',
+                  value: controller.applier!.email,
                 ),
-                const ReadOnlyTextField(
+                ReadOnlyTextField(
                   label: 'Number Phone',
-                  value: '08212322XXXX',
-                ),
-                const ReadOnlyTextField(
-                  label: 'Name',
-                  value: 'Abyan Athar',
+                  value: controller.applier!.phone,
                 ),
                 NotReallyTextField(
                   label: 'Education',
-                  value: 'Information System (Bachelor Degree) Kalimantan Institute of Technology 2020 - 2024',
-                  actions: [
+                  value: controller.applier!.education,
+                  actions: (controller.editable) ? [
                     MOutlinedButton(
                       minWidth: 75,
                       onPressed: controller.onEditEducation,
@@ -89,7 +87,14 @@ class _JobSeekerMyProfileState extends ViewState<JobSeekerMyProfilePage, JobSeek
                         child: const Text('Delete'),
                       ),
                     ),
-                  ],
+                  ] : null,
+                ),
+                if (widget.applier!=null) Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 32.0),
+                  child: PrimaryElevatedButton(
+                    onPressed: controller.onHire,
+                    child: const Text('Hire'),
+                  ),
                 ),
               ],
             ),

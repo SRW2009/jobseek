@@ -43,4 +43,8 @@ class JobSeekerHomeController extends Controller {
   void onNavigateMyFiles() {
     Navigator.pushNamed(getContext(), JobSeekerRoute.myFiles);
   }
+
+  void onSignOut() {
+    Navigator.pushReplacementNamed(getContext(), JobSeekerRoute.login);
+  }
 }

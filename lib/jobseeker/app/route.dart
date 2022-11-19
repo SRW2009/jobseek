@@ -1,18 +1,20 @@
 
 import 'package:flutter/material.dart';
-import 'package:jobseek/jobseeker/app/pages/available-job/available_job_page.dart';
-import 'package:jobseek/jobseeker/app/pages/choose-specialization/choose_specialization_page.dart';
-import 'package:jobseek/jobseeker/app/pages/choose-occupation/choose_occupation_page.dart';
-import 'package:jobseek/jobseeker/app/pages/home/home_page.dart';
-import 'package:jobseek/jobseeker/app/pages/identity-verification/identity_verification_page.dart';
-import 'package:jobseek/jobseeker/app/pages/job-apply-done/job_apply_done_page.dart';
-import 'package:jobseek/jobseeker/app/pages/job-apply/job_apply_page.dart';
-import 'package:jobseek/jobseeker/app/pages/job-detail/job_detail_page.dart';
-import 'package:jobseek/jobseeker/app/pages/login/login_page.dart';
-import 'package:jobseek/jobseeker/app/pages/my-files/my_files_page.dart';
-import 'package:jobseek/jobseeker/app/pages/my-profile/my_profile_page.dart';
-import 'package:jobseek/jobseeker/app/pages/register/register_page.dart';
+import 'package:jobseek/shared/domain/entities/applier.dart';
 import 'package:jobseek/shared/domain/entities/job.dart';
+
+import 'pages/available-job/available_job_page.dart';
+import 'pages/choose-specialization/choose_specialization_page.dart';
+import 'pages/choose-occupation/choose_occupation_page.dart';
+import 'pages/home/home_page.dart';
+import 'pages/identity-verification/identity_verification_page.dart';
+import 'pages/job-apply-done/job_apply_done_page.dart';
+import 'pages/job-apply/job_apply_page.dart';
+import 'pages/job-detail/job_detail_page.dart';
+import 'pages/login/login_page.dart';
+import 'pages/my-files/my_files_page.dart';
+import 'pages/my-profile/my_profile_page.dart';
+import 'pages/register/register_page.dart';
 
 class JobSeekerRoute extends MaterialPageRoute {
   static const String _prefix = '/jobseeker';
@@ -37,7 +39,7 @@ class JobSeekerRoute extends MaterialPageRoute {
     switch (settings.name) {
       case register: return const JobSeekerRegisterPage();
       case home: return const JobSeekerHomePage();
-      case myProfile: return const JobSeekerMyProfilePage();
+      case myProfile: return JobSeekerMyProfilePage(settings.arguments as Applier?);
       case myFiles: return const JobSeekerMyFilesPage();
       case identityVerification: return const JobSeekerIdentityVerificationPage();
       case chooseSpecialization: return const JobSeekerChooseSpecializationPage();

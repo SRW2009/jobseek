@@ -6,6 +6,10 @@ class Specialization {
   final IconData image;
   final String title;
 
-  Specialization(//this.id,
+  const Specialization(//this.id,
     this.image, this.title);
+
+  const Specialization.none()
+      : image = const IconData(0),
+        title = '';
 }
