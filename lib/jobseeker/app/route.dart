@@ -43,9 +43,9 @@ class JobSeekerRoute extends MaterialPageRoute {
       case myFiles: return const JobSeekerMyFilesPage();
       case identityVerification: return const JobSeekerIdentityVerificationPage();
       case chooseSpecialization: return const JobSeekerChooseSpecializationPage();
-      case chooseOccupation: return const JobSeekerChooseOccupationPage();
-      case availableJob: return const JobSeekerAvailableJobPage();
-      case jobDetail: return JobSeekerJobDetailPage(settings.arguments! as Job);
+      case chooseOccupation: return JobSeekerChooseOccupationPage(settings.arguments! as int);
+      case availableJob: return JobSeekerAvailableJobPage(settings.arguments! as int);
+      case jobDetail: return JobSeekerJobDetailPage(settings.arguments! as int);
       case jobApply: return JobSeekerJobApplyPage(settings.arguments! as Job);
       case jobApplyDone: return JobSeekerJobApplyDonePage(settings.arguments! as String);
       case login: default: return const JobSeekerLoginPage();

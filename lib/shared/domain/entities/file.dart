@@ -4,5 +4,5 @@ class File {
   final String title;
   final String fileName;
 
-  File(this.id, this.title, this.fileName);
+  const File(this.id, this.title, this.fileName);
 }

@@ -19,6 +19,7 @@ class Company extends User {
   final String? contactPersonPhone;
 
   Company(super.id, super.name, super.email, super.phone, super.city, this.address, {
+    super.photoUrl,
     this.verified=false,
     this.taxPayerIdentificationNumber,
     this.taxPayerIdentificationFile,

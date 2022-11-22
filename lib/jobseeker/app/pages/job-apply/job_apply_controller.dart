@@ -5,6 +5,8 @@ import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:jobseek/jobseeker/app/route.dart';
 import 'package:jobseek/shared/app/widgets/form_field/text_input_controller.dart';
 
+import 'payment_sheet.dart';
+
 class JobSeekerJobApplyController extends Controller {
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
@@ -25,6 +27,19 @@ class JobSeekerJobApplyController extends Controller {
   }
 
   void onSubmit(String companyName) {
+    showModalBottomSheet<void>(
+      context: getContext(),
+      backgroundColor: const Color(0xFF002248),
+      isScrollControlled: true,
+      builder: (context) {
+        return JobSeekerJobApplyPaymentSheet(
+          onConfirmPayment: () => _onConfirmPayment(companyName),
+        );
+      },
+    );
+  }
+
+  void _onConfirmPayment(String companyName) {
     Navigator.pushNamed(getContext(), JobSeekerRoute.jobApplyDone, arguments: companyName);
   }
 }

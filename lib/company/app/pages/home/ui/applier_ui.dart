@@ -26,15 +26,15 @@ class _CompanyUIApplierState extends State<CompanyHomeUIApplier> {
       SliverList(
         delegate: SliverChildBuilderDelegate(
           (context, index) {
-            final applier = widget.controller.appliers[index];
+            final applier = widget.controller.data?.appliers?[index];
             return SeeDetailTile(
-              title: applier.occupation.title,
+              title: applier!.occupation.title,
               image: applier.image,
               onSeeDetail: () => widget.controller.onNavigateApplierDetail(applier),
               child: Text(applier.name),
             );
           },
-          childCount: widget.controller.appliers.length,
+          childCount: widget.controller.data?.appliers?.length??0,
         ),
       ),
     ],

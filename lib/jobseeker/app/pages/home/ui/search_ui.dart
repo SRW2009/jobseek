@@ -50,13 +50,14 @@ class _JobSeekerUISearchState extends State<JobSeekerHomeUISearch> {
         sliver: SliverList(
           delegate: SliverChildBuilderDelegate(
             (context, index) {
-              final category = widget.controller.categories[index];
+              final category = widget.controller.data?.specializations?[index];
               return CategoryCard(
-                category,
+                image: category!.image,
+                title: category.title,
                 onTap: () => widget.controller.onSelectCategory(category),
               );
             },
-            childCount: widget.controller.categories.length,
+            childCount: widget.controller.data?.specializations?.length??0,
           ),
         ),
       ),

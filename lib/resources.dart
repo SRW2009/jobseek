@@ -14,10 +14,7 @@ class Assets {
   static const String category3 = 'asset/img/category3.PNG';
   static const String category4 = 'asset/img/category4.PNG';
   static const String category5 = 'asset/img/category5.PNG';
-}
-
-class Strings {
-
+  static const String paymentSheet = 'asset/img/sheet-payment.jpeg';
 }
 
 class LoremIpsum {

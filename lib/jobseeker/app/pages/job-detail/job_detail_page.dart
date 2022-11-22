@@ -1,17 +1,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:jobseek/shared/domain/entities/job.dart';
-import 'package:jobseek/shared/app/widgets/controlled_slivers_builder.dart';
+import 'package:jobseek/jobseeker/data/repositories/job_repo.dart';
+import 'package:jobseek/shared/app/widgets/common/data_controlled_slivers_builder.dart';
 import 'package:jobseek/shared/app/widgets/primary_elevated_button.dart';
 import 'package:jobseek/shared/app/widgets/primary_sliver_appbar.dart';
+import 'package:jobseek/shared/domain/entities/job.dart';
 
 import 'job_detail_controller.dart';
 
 class JobSeekerJobDetailPage extends View {
-  final Job job;
+  final int jobId;
 
-  const JobSeekerJobDetailPage(this.job, {super.key});
+  const JobSeekerJobDetailPage(this.jobId, {super.key});
 
   @override
   State<StatefulWidget> createState() => _JobSeekerJobDetailState();
@@ -21,14 +22,14 @@ class _JobSeekerJobDetailState extends ViewState<JobSeekerJobDetailPage, JobSeek
   static const _textHeight = 1.4;
 
   _JobSeekerJobDetailState()
-      : super(JobSeekerJobDetailController());
+      : super(JobSeekerJobDetailController(JobSeekerJobRepository()));
 
   @override
   Widget get view => Scaffold(
     key: globalKey,
     backgroundColor: Theme.of(context).colorScheme.background,
-    body: ControlledSliversBuilder<JobSeekerJobDetailController>(
-      sliversBuilder: (context, controller) => [
+    body: DataControlledSliversBuilder<JobSeekerJobDetailController, Job>(
+      sliversBuilder: (context, controller, data) => [
         PrimarySliverAppBar(
           label: 'Job Information',
           actions: [
@@ -40,7 +41,7 @@ class _JobSeekerJobDetailState extends ViewState<JobSeekerJobDetailPage, JobSeek
           sliver: SliverToBoxAdapter(
             child: SizedBox.square(
               dimension: 150,
-              child: Image.asset(widget.job.image, fit: BoxFit.fitHeight,),
+              child: Image.network(data.image, fit: BoxFit.fitHeight),
             ),
           ),
         ),
@@ -73,13 +74,13 @@ class _JobSeekerJobDetailState extends ViewState<JobSeekerJobDetailPage, JobSeek
                   visualDensity: VisualDensity.compact,
                   minVerticalPadding: 0,
                   title: Text(
-                    widget.job.occupation,
+                    data.occupation,
                     style: const TextStyle(fontWeight: FontWeight.w700),
                   ),
                   subtitle: Padding(
                     padding: const EdgeInsets.only(top: 6.0),
                     child: Text(
-                      widget.job.companyName,
+                      data.companyName,
                       style: const TextStyle(color: Colors.black, height: _textHeight),
                     ),
                   ),
@@ -96,7 +97,7 @@ class _JobSeekerJobDetailState extends ViewState<JobSeekerJobDetailPage, JobSeek
                   subtitle: Padding(
                     padding: const EdgeInsets.only(top: 6.0),
                     child: Text(
-                      widget.job.description,
+                      data.description,
                       style: const TextStyle(color: Colors.black, height: _textHeight),
                     ),
                   ),
@@ -113,7 +114,7 @@ class _JobSeekerJobDetailState extends ViewState<JobSeekerJobDetailPage, JobSeek
                   subtitle: Padding(
                     padding: const EdgeInsets.only(top: 6.0),
                     child: Text(
-                      widget.job.requirement,
+                      data.requirement,
                       style: const TextStyle(color: Colors.black, height: _textHeight),
                     ),
                   ),
@@ -122,7 +123,7 @@ class _JobSeekerJobDetailState extends ViewState<JobSeekerJobDetailPage, JobSeek
                   padding: const EdgeInsets.all(16.0),
                   child: Center(
                     child: PrimaryElevatedButton(
-                      onPressed: () => controller.onApplyJob(widget.job),
+                      onPressed: () => controller.onApplyJob(data),
                       child: const Text('Apply this Job'),
                     ),
                   ),

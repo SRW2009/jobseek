@@ -1,10 +1,26 @@
 
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:jobseek/shared/app/widgets/common/data_controller.dart';
+import 'package:jobseek/shared/domain/entities/company.dart';
 
-class CompanyMyProfileController extends Controller {
+import 'my_profile_presenter.dart';
+import 'my_profile_page.dart';
+
+class CompanyMyProfileController extends DataController<Company, CompanyMyProfilePage> {
+
+  final CompanyMyProfilePresenter _presenter;
+  CompanyMyProfileController(userRepo)
+      : _presenter = CompanyMyProfilePresenter(userRepo);
 
   @override
-  void initListeners() {}
+  void initListeners() {
+    _presenter.getProfileCallback = getDataCallback;
+  }
+
+  @override
+  void onReload() {
+    setDataStateLoading();
+    _presenter.getCompany(1);
+  }
 
   void onEditImage() {}
   

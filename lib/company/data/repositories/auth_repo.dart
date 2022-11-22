@@ -1,0 +1,30 @@
+
+import 'package:jobseek/http.dart';
+import 'package:jobseek/shared/domain/entities/user.dart';
+import 'package:jobseek/shared/domain/repositories/auth_repo.dart';
+
+class CompanyAuthenticationRepository extends AuthenticationRepo {
+  @override
+  Future<bool> authenticate(String email, String password) async {
+    final response = await Http.post('/api/login');
+    return true;
+  }
+
+  @override
+  Future<bool> register(User user) async {
+    final response = await Http.post('/api/register');
+    return true;
+  }
+
+  @override
+  Future<bool> isAuthenticated() async {
+    // TODO: implement isAuthenticated
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<bool> logout() async {
+    // TODO: implement logout
+    throw UnimplementedError();
+  }
+}

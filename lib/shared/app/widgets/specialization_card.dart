@@ -1,19 +1,15 @@
 
 import 'package:flutter/material.dart';
+import 'package:jobseek/shared/domain/entities/specialization.dart';
 
 class SpecializationCard extends StatelessWidget {
-  //final Specialization item;
-  final String title;
-  final IconData icon;
+  final Specialization item;
   final Function()? onTap;
   final bool selected;
 
-  //const SpecializationCard(this.item, {super.key, this.onTap});
-
   const SpecializationCard({
     super.key,
-    required this.title,
-    required this.icon,
+    required this.item,
     this.onTap,
     this.selected=false,
   });
@@ -33,18 +29,13 @@ class SpecializationCard extends StatelessWidget {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.only(top: 16.0),
-                child: FittedBox(
-                  child: Icon(
-                    icon,
-                    color: Theme.of(context).colorScheme.onPrimary,
-                  ),
-                ),
+                child: Image.network(item.image, fit: BoxFit.cover),
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: Text(
-                title,
+                item.title,
                 style: const TextStyle(
                   fontSize: 18,
                 ),

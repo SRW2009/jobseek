@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:jobseek/resources.dart';
-import 'package:jobseek/shared/app/widgets/controlled_slivers_builder.dart';
+import 'package:jobseek/shared/app/widgets/common/controlled_slivers_builder.dart';
 
 import 'main_menu_controller.dart';
 

@@ -1,15 +1,19 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:jobseek/shared/app/widgets/controlled_slivers_builder.dart';
-import 'package:jobseek/shared/app/widgets/splash_tile.dart';
+import 'package:jobseek/jobseeker/data/repositories/job_repo.dart';
+import 'package:jobseek/shared/app/widgets/common/data_controlled_slivers_builder.dart';
 import 'package:jobseek/shared/app/widgets/next_fab.dart';
 import 'package:jobseek/shared/app/widgets/primary_sliver_appbar.dart';
+import 'package:jobseek/shared/app/widgets/splash_tile.dart';
+import 'package:jobseek/shared/domain/entities/job.dart';
 
 import 'available_job_controller.dart';
 
 class JobSeekerAvailableJobPage extends View {
-  const JobSeekerAvailableJobPage({super.key});
+  final int occupationId;
+
+  const JobSeekerAvailableJobPage(this.occupationId, {super.key});
 
   @override
   State<StatefulWidget> createState() => _JobSeekerAvailableJobState();
@@ -17,14 +21,14 @@ class JobSeekerAvailableJobPage extends View {
 
 class _JobSeekerAvailableJobState extends ViewState<JobSeekerAvailableJobPage, JobSeekerAvailableJobController> {
   _JobSeekerAvailableJobState()
-      : super(JobSeekerAvailableJobController());
+      : super(JobSeekerAvailableJobController(JobSeekerJobRepository()));
 
   @override
   Widget get view => SizedBox(
     key: globalKey,
     child: Scaffold(
-      body: ControlledSliversBuilder<JobSeekerAvailableJobController>(
-        sliversBuilder: (context, controller) => [
+      body: DataControlledSliversBuilder<JobSeekerAvailableJobController, List<Job>>(
+        sliversBuilder: (context, controller, data) => [
           PrimarySliverAppBar(
             label: 'Available Jobs',
             actions: [
@@ -34,18 +38,17 @@ class _JobSeekerAvailableJobState extends ViewState<JobSeekerAvailableJobPage, J
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                final job = controller.jobs[index];
+                final job = data[index];
                 return SplashTile(
                   key: ValueKey("$index${controller.selectedIndex==index}"),
                   title: job.occupation,
                   subtitle: job.companyName,
-                  // TODO: fetch image from network
-                  image: Image.asset(job.image, fit: BoxFit.fitHeight),
+                  image: Image.network(job.image, fit: BoxFit.fitHeight),
                   onTap: () => controller.onSelectJob(index),
                   selected: controller.selectedIndex==index,
                 );
               },
-              childCount: controller.jobs.length,
+              childCount: data.length,
             ),
           ),
         ],

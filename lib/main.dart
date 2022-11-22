@@ -18,12 +18,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'JobSeek',
       theme: ThemeData(
+        scaffoldBackgroundColor: const Color(0xFFFDFDFD),
         colorScheme: const ColorScheme(
           brightness: Brightness.light,
           primary: Color(0xFFF8DA8B),
           onPrimary: Color(0xFF322C1C),
           secondary: Color(0xFF58595B),
-          onSecondary: Color(0xFFE9E9EA),
+          onSecondary: Color(0xFFFDFDFD),
           secondaryContainer: Color(0xFF505E6C),
           onSecondaryContainer: Color(0xFFFDFDFD),
           error: Color(0xFFFD4848),

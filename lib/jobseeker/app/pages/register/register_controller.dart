@@ -4,6 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:jobseek/jobseeker/app/route.dart';
 import 'package:jobseek/shared/app/route.dart';
+import 'package:jobseek/shared/domain/entities/jobseeker.dart';
+
+import 'register_presenter.dart';
 
 class JobSeekerRegisterController extends Controller {
   final GlobalKey<FormState> formKey = GlobalKey();
@@ -15,11 +18,30 @@ class JobSeekerRegisterController extends Controller {
   final TextEditingController cPasswordController = TextEditingController();
   final ValueNotifier<bool?> agreementNotifier = ValueNotifier(false);
 
+  final JobSeekerRegisterPresenter _presenter;
+  JobSeekerRegisterController(authRepo)
+      : _presenter = JobSeekerRegisterPresenter(authRepo);
+
+  bool loading = false;
+
+  void _register(bool state) {
+    if (state) {
+      Navigator.pushReplacementNamed(getContext(), JobSeekerRoute.home);
+    } else {
+      loading = false;
+      refreshUI();
+
+      ScaffoldMessenger.of(getContext())
+          .showSnackBar(const SnackBar(content: Text('Register failed')));
+    }
+  }
+
   @override
-  void initListeners() {}
+  void initListeners() {
+    _presenter.registerCallback = _register;
+  }
 
   void onRegister() {
-
     if (formKey.currentState?.validate() ?? false) {
       final name = nameController.text;
       final email = emailController.text;
@@ -28,7 +50,11 @@ class JobSeekerRegisterController extends Controller {
       final password = passwordController.text;
       final cPassword = cPasswordController.text;
 
-      Navigator.pushReplacementNamed(getContext(), JobSeekerRoute.home);
+      loading = true;
+      refreshUI();
+      _presenter.register(
+        JobSeeker(0, name, email, phone, city),
+      );
     } else {
       if (!(agreementNotifier.value ?? false)) {
         ScaffoldMessenger.of(getContext()).showSnackBar(

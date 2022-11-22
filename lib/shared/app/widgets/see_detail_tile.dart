@@ -33,8 +33,7 @@ class SeeDetailTile extends StatelessWidget {
               dimension: 70,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(35),
-                // TODO: fetch image from network
-                child: Image.asset(image, fit: BoxFit.fitHeight),
+                child: Image.network(image, fit: BoxFit.fitHeight),
               ),
             ),
           ),

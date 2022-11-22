@@ -1,10 +1,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:jobseek/shared/app/widgets/controlled_slivers_builder.dart';
+import 'package:jobseek/jobseeker/data/repositories/specialization_repo.dart';
+import 'package:jobseek/shared/app/widgets/common/data_controlled_slivers_builder.dart';
 import 'package:jobseek/shared/app/widgets/next_fab.dart';
 import 'package:jobseek/shared/app/widgets/primary_sliver_appbar.dart';
 import 'package:jobseek/shared/app/widgets/specialization_card.dart';
+import 'package:jobseek/shared/domain/entities/specialization.dart';
 
 import 'choose_specialization_controller.dart';
 
@@ -17,14 +19,14 @@ class JobSeekerChooseSpecializationPage extends View {
 
 class _JobSeekerChooseSpecializationCategoryState extends ViewState<JobSeekerChooseSpecializationPage, JobSeekerChooseSpecializationController> {
   _JobSeekerChooseSpecializationCategoryState()
-      : super(JobSeekerChooseSpecializationController());
+      : super(JobSeekerChooseSpecializationController(JobSeekerSpecializationRepository()));
 
   @override
   Widget get view => SizedBox(
     key: globalKey,
     child: Scaffold(
-      body: ControlledSliversBuilder<JobSeekerChooseSpecializationController>(
-        sliversBuilder: (context, controller) => [
+      body: DataControlledSliversBuilder<JobSeekerChooseSpecializationController, List<Specialization>>(
+        sliversBuilder: (context, controller, data) => [
           const PrimarySliverAppBar(
             label: 'Choose Your Specialization',
             implyLeading: false,
@@ -39,16 +41,15 @@ class _JobSeekerChooseSpecializationCategoryState extends ViewState<JobSeekerCho
               ),
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
-                  final specialization = controller.specializations[index];
+                  final specialization = data[index];
                   return SpecializationCard(
                     key: ValueKey("$index${controller.selectedIndex==index}"),
-                    title: specialization.title,
-                    icon: specialization.image,
+                    item: specialization,
                     onTap: () => controller.onSelectSpecialization(index),
                     selected: controller.selectedIndex==index,
                   );
                 },
-                childCount: controller.specializations.length,
+                childCount: data.length,
               ),
             ),
           ),

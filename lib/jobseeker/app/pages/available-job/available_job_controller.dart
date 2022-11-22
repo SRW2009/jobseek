@@ -1,24 +1,36 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
 import 'package:jobseek/jobseeker/app/route.dart';
-import 'package:jobseek/jobseeker/data/dummies.dart' as d;
+import 'package:jobseek/shared/app/widgets/common/data_controller.dart';
 import 'package:jobseek/shared/domain/entities/job.dart';
 
-class JobSeekerAvailableJobController extends Controller {
-  // TODO: fetch data from internet
-  final jobs = d.jobs;
+import 'available_job_page.dart';
+import 'available_job_presenter.dart';
+
+class JobSeekerAvailableJobController extends DataController<List<Job>, JobSeekerAvailableJobPage> {
+  
+  final JobSeekerAvailableJobPresenter _presenter;
+  JobSeekerAvailableJobController(jobRepo)
+      : _presenter = JobSeekerAvailableJobPresenter(jobRepo);
 
   Job? _job;
   int selectedIndex = -1;
 
   @override
-  void initListeners() {}
+  void initListeners() {
+    _presenter.getJobsCallback = getDataCallback;
+  }
+
+  @override
+  void onReload() {
+    setDataStateLoading();
+    _presenter.getJobs(widget?.occupationId??0);
+  }
 
   void onSearch() {}
 
   onSelectJob(int i) {
-    _job = jobs[i];
+    _job = data?[i];
     selectedIndex = i;
     refreshUI();
   }
@@ -30,6 +42,6 @@ class JobSeekerAvailableJobController extends Controller {
       return;
     }
 
-    Navigator.pushNamed(getContext(), JobSeekerRoute.jobDetail, arguments: _job);
+    Navigator.pushNamed(getContext(), JobSeekerRoute.jobDetail, arguments: _job!.id);
   }
 }

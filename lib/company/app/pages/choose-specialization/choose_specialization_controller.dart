@@ -1,22 +1,34 @@
 
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:jobseek/company/app/route.dart';
-import 'package:jobseek/company/data/dummies.dart' as d;
-import 'package:jobseek/shared/domain/entities/specialization.dart';
 import 'package:flutter/material.dart';
+import 'package:jobseek/company/app/route.dart';
+import 'package:jobseek/shared/app/widgets/common/data_controller.dart';
+import 'package:jobseek/shared/domain/entities/specialization.dart';
 
-class CompanyChooseSpecializationController extends Controller {
-  // TODO: fetch data from internet
-  final specializations = d.specializations;
+import 'choose_specialization_page.dart';
+import 'choose_specialization_presenter.dart';
+
+class CompanyChooseSpecializationController extends DataController<List<Specialization>, CompanyChooseSpecializationPage> {
+
+  final CompanyChooseSpecializationPresenter _presenter;
+  CompanyChooseSpecializationController(specializationRepo)
+      : _presenter = CompanyChooseSpecializationPresenter(specializationRepo);
 
   Specialization? _specialization;
   int selectedIndex = -1;
 
   @override
-  void initListeners() {}
+  void initListeners() {
+    _presenter.getSpecializationsCallback = getDataCallback;
+  }
+
+  @override
+  void onReload() {
+    setDataStateLoading();
+    _presenter.getSpecializations();
+  }
 
   void onSelectSpecialization(int i) {
-    _specialization = specializations[i];
+    _specialization = data?[i];
     selectedIndex = i;
     refreshUI();
   }

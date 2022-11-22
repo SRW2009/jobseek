@@ -1,22 +1,34 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:jobseek/jobseeker/app/pages/choose-occupation/choose_occupation_page.dart';
 import 'package:jobseek/jobseeker/app/route.dart';
-import 'package:jobseek/jobseeker/data/dummies.dart' as d;
+import 'package:jobseek/shared/app/widgets/common/data_controller.dart';
 import 'package:jobseek/shared/domain/entities/occupation.dart';
 
-class JobSeekerChooseOccupationController extends Controller {
-  // TODO: fetch data from internet
-  final occupations = d.occupations;
+import 'choose_occupation_presenter.dart';
+
+class JobSeekerChooseOccupationController extends DataController<List<Occupation>, JobSeekerChooseOccupationPage> {
+  
+  final JobSeekerChooseOccupationPresenter _presenter;
+  JobSeekerChooseOccupationController(occupationRepo)
+      : _presenter = JobSeekerChooseOccupationPresenter(occupationRepo);
 
   Occupation? _occupation;
   int selectedIndex = -1;
 
   @override
-  void initListeners() {}
+  void initListeners() {
+    _presenter.getOccupationsCallback = getDataCallback;
+  }
+
+  @override
+  void onReload() {
+    setDataStateLoading();
+    _presenter.getOccupations(widget?.specializationId??0);
+  }
 
   void onSelectOccupation(int i) {
-    _occupation = occupations[i];
+    _occupation = data?[i];
     selectedIndex = i;
     refreshUI();
   }
@@ -28,7 +40,7 @@ class JobSeekerChooseOccupationController extends Controller {
       return;
     }
 
-    Navigator.pushNamed(getContext(), JobSeekerRoute.availableJob);
+    Navigator.pushNamed(getContext(), JobSeekerRoute.availableJob, arguments: _occupation!.id);
   }
 
   void onNavigateHome() {

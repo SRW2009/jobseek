@@ -2,7 +2,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:jobseek/shared/app/widgets/controlled_slivers_builder.dart';
+import 'package:jobseek/company/data/repositories/auth_repo.dart';
+import 'package:jobseek/shared/app/widgets/common/controlled_slivers_builder.dart';
 import 'package:jobseek/shared/app/widgets/form_field/checkbox_field.dart';
 import 'package:jobseek/shared/app/widgets/form_field/text_input_field.dart';
 import 'package:jobseek/shared/app/widgets/primary_text_button.dart';
@@ -20,7 +21,7 @@ class CompanyRegisterPage extends View {
 
 class _CompanyRegisterState extends ViewState<CompanyRegisterPage, CompanyRegisterController> {
   _CompanyRegisterState()
-      : super(CompanyRegisterController());
+      : super(CompanyRegisterController(CompanyAuthenticationRepository()));
 
   @override
   Widget get view => Scaffold(
@@ -126,8 +127,8 @@ class _CompanyRegisterState extends ViewState<CompanyRegisterPage, CompanyRegist
                     padding: const EdgeInsets.only(top: 30.0),
                     child: Center(
                       child: SecondaryElevatedButton(
-                        onPressed: controller.onRegister,
-                        child: const Text('Sign Up'),
+                        onPressed: controller.loading ? null : controller.onRegister,
+                        child: controller.loading ? const CircularProgressIndicator() : const Text('Sign Up'),
                       ),
                     ),
                   ),

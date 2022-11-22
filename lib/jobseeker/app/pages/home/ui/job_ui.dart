@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:jobseek/shared/app/widgets/splash_tile.dart';
 import 'package:jobseek/shared/app/widgets/primary_sliver_appbar.dart';
+import 'package:jobseek/shared/app/widgets/splash_tile.dart';
 
 import '../home_controller.dart';
 
@@ -26,16 +26,15 @@ class _JobSeekerUIJobState extends State<JobSeekerHomeUIJob> {
       SliverList(
         delegate: SliverChildBuilderDelegate(
           (context, index) {
-            final job = widget.controller.jobs[index];
+            final job = widget.controller.data?.jobs?[index];
             return SplashTile(
-              title: job.occupation,
+              title: job!.occupation,
               subtitle: job.companyName,
-              // TODO: fetch image from network
-              image: Image.asset(job.image, fit: BoxFit.fitHeight),
+              image: Image.network(job.image, fit: BoxFit.fitHeight),
               onTap: () => widget.controller.onNavigateJobDetail(job),
             );
           },
-          childCount: widget.controller.jobs.length,
+          childCount: widget.controller.data?.jobs?.length??0,
         ),
       ),
     ],

@@ -1,7 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
-import 'package:jobseek/shared/app/widgets/controlled_slivers_builder.dart';
+import 'package:jobseek/company/data/repositories/auth_repo.dart';
+import 'package:jobseek/shared/app/widgets/common/controlled_slivers_builder.dart';
 import 'package:jobseek/shared/app/widgets/form_field/text_input_field.dart';
 import 'package:jobseek/shared/app/widgets/primary_text_button.dart';
 import 'package:jobseek/shared/app/widgets/secondary_elevated_button.dart';
@@ -19,7 +20,7 @@ class CompanyLoginPage extends View {
 
 class _CompanyLoginState extends ViewState<CompanyLoginPage, CompanyLoginController> {
   _CompanyLoginState()
-      : super(CompanyLoginController());
+      : super(CompanyLoginController(CompanyAuthenticationRepository()));
 
   @override
   Widget get view => Scaffold(
@@ -64,8 +65,8 @@ class _CompanyLoginState extends ViewState<CompanyLoginPage, CompanyLoginControl
                   ),
                   Center(
                     child: SecondaryElevatedButton(
-                      onPressed: controller.onLogin,
-                      child: const Text('Log In'),
+                      onPressed: controller.loading ? null : controller.onLogin,
+                      child: controller.loading ? const CircularProgressIndicator() : const Text('Log In'),
                     ),
                   ),
                   const Expanded(child: SizedBox()),

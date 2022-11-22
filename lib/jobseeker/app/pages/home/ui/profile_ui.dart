@@ -1,9 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:jobseek/shared/app/widgets/splash_tile.dart';
 import 'package:jobseek/shared/app/widgets/m_outlined_button.dart';
 import 'package:jobseek/shared/app/widgets/primary_sliver_appbar.dart';
-import 'package:jobseek/resources.dart';
+import 'package:jobseek/shared/app/widgets/splash_tile.dart';
 
 import '../home_controller.dart';
 
@@ -33,10 +32,9 @@ class _JobSeekerUIProfileState extends State<JobSeekerHomeUIProfile> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SplashTile(
-                title: 'Abyan Athar',
-                subtitle: 'Balikpapan, Kalimantan Timur',
-                // TODO: fetch image from network
-                image: Image.asset(Assets.logo, fit: BoxFit.fitHeight),
+                title: widget.controller.data!.profile!.name,
+                subtitle: widget.controller.data!.profile!.city,
+                image: Image.network(widget.controller.data!.profile!.photoUrl??'', fit: BoxFit.fitHeight),
                 imageRadius: 80,
               ),
               const Padding(

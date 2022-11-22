@@ -9,8 +9,23 @@ class CircleImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox.square(
-      dimension: radius,
+    return Container(
+      width: radius,
+      height: radius,
+      decoration: ShapeDecoration(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(radius/2),
+        ),
+        shadows: [
+          BoxShadow(
+            color: Theme.of(context).colorScheme.shadow,
+            offset: const Offset(0, 2),
+            blurRadius: 1,
+            spreadRadius: 0.6,
+            blurStyle: BlurStyle.normal,
+          ),
+        ],
+      ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(radius/2),
         child: image,

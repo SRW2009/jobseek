@@ -1,22 +1,64 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_clean_architecture/flutter_clean_architecture.dart';
+import 'package:jobseek/jobseeker/app/pages/home/home_page.dart';
 import 'package:jobseek/jobseeker/app/route.dart';
-import 'package:jobseek/shared/domain/entities/job.dart';
 import 'package:jobseek/jobseeker/data/dummies.dart' as d;
-import 'package:jobseek/shared/domain/entities/category.dart';
+import 'package:jobseek/shared/app/widgets/common/data_controller.dart';
+import 'package:jobseek/shared/domain/entities/job.dart';
+import 'package:jobseek/shared/domain/entities/notification.dart' as n;
+import 'package:jobseek/shared/domain/entities/specialization.dart';
 
-class JobSeekerHomeController extends Controller {
+import 'home_data.dart';
+import 'home_presenter.dart';
+
+class JobSeekerHomeController extends DataController<JobSeekerHomeData, JobSeekerHomePage> {
   final pageController = PageController();
   int activePageIndex = 0;
 
-  // TODO: fetch data from internet
-  final jobs = d.jobs;
-  final categories = d.categories;
-  final notifications = d.notifications;
+  final JobSeekerHomePresenter _presenter;
+  JobSeekerHomeController(jobRepo, specializationRepo, userRepo)
+      : _presenter = JobSeekerHomePresenter(jobRepo, specializationRepo, userRepo);
+
+  final List<n.Notification<Job>> notifications = d.notifications;
 
   @override
-  void initListeners() {}
+  void initListeners() {
+    _presenter.getJobsCallback = (jobs) {
+      if (jobs==null) {
+        setDataStateError();
+      } else {
+        data ??= JobSeekerHomeData();
+        data!.jobs=jobs;
+        if (data?.specializations!=null&&data?.profile!=null) setDataStateSuccess();
+      }
+    };
+    _presenter.getSpecializationsCallback = (specializations) {
+      if (specializations==null) {
+        setDataStateError();
+      } else {
+        data ??= JobSeekerHomeData();
+        data!.specializations=specializations;
+        if (data?.jobs!=null&&data?.profile!=null) setDataStateSuccess();
+      }
+    };
+    _presenter.getProfileCallback = (user) {
+      if (user==null) {
+        setDataStateError();
+      } else {
+        data ??= JobSeekerHomeData();
+        data!.profile=user;
+        if (data?.jobs!=null&&data?.specializations!=null) setDataStateSuccess();
+      }
+    };
+  }
+
+  @override
+  void onReload() {
+    setDataStateLoading();
+    _presenter.getJobs(1);
+    _presenter.getSpecializations();
+    _presenter.getProfile(1);
+  }
 
   void onSelectNavItem(int index) {
     activePageIndex = index;
@@ -26,10 +68,10 @@ class JobSeekerHomeController extends Controller {
 
   void onSearchChanged(String query) {}
 
-  void onSelectCategory(Category category) {}
+  void onSelectCategory(Specialization category) {}
 
   void onNavigateJobDetail(Job job) {
-    Navigator.pushNamed(getContext(), JobSeekerRoute.jobDetail, arguments: job);
+    Navigator.pushNamed(getContext(), JobSeekerRoute.jobDetail, arguments: job.id);
   }
 
   void onNavigateMyProfile() {
