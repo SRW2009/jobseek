@@ -30,7 +30,8 @@ class _CompanyUINotificationState extends State<CompanyHomeUINotification> {
             return SeeDetailTile(
               image: notification.detail.image,
               time: notification.notifiedAt,
-              onSeeDetail: () => widget.controller.onNavigateApplierDetail(notification.detail),
+              onSeeDetail: () {},//=> widget.controller.onNavigateApplierDetail(notification.detail),
+              onMore: () {},
               child: RichText(
                 text: TextSpan(
                   text: '${notification.detail.name} has applied as a ',

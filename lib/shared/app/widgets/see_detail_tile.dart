@@ -66,7 +66,7 @@ class SeeDetailTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 if (time!=null) Text(DateFormatter.toApproximateTime(time!)),
-                Padding(
+                if (onMore!=null) Padding(
                   padding: const EdgeInsets.only(top: 10.0),
                   child: InkWell(
                     onTap: onMore,

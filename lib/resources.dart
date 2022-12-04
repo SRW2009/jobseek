@@ -1,20 +1,26 @@
 
 class Assets {
-  static const String logo = 'asset/img/logo.png';
-  static const String company1 = 'asset/img/company1.PNG';
-  static const String company2 = 'asset/img/company2.PNG';
-  static const String company3 = 'asset/img/company3.PNG';
-  static const String company4 = 'asset/img/company4.PNG';
-  static const String company5 = 'asset/img/company5.PNG';
-  static const String company6 = 'asset/img/company6.PNG';
-  static const String company7 = 'asset/img/company7.PNG';
-  static const String company8 = 'asset/img/company8.PNG';
-  static const String category1 = 'asset/img/category1.PNG';
-  static const String category2 = 'asset/img/category2.PNG';
-  static const String category3 = 'asset/img/category3.PNG';
-  static const String category4 = 'asset/img/category4.PNG';
-  static const String category5 = 'asset/img/category5.PNG';
-  static const String paymentSheet = 'asset/img/sheet-payment.jpeg';
+  static const String _prefix = 'asset/img';
+  static const String logo = '$_prefix/logo.png';
+  static const String company1 = '$_prefix/company1.PNG';
+  static const String company2 = '$_prefix/company2.PNG';
+  static const String company3 = '$_prefix/company3.PNG';
+  static const String company4 = '$_prefix/company4.PNG';
+  static const String company5 = '$_prefix/company5.PNG';
+  static const String company6 = '$_prefix/company6.PNG';
+  static const String company7 = '$_prefix/company7.PNG';
+  static const String company8 = '$_prefix/company8.PNG';
+  static const String category1 = '$_prefix/category1.PNG';
+  static const String category2 = '$_prefix/category2.PNG';
+  static const String category3 = '$_prefix/category3.PNG';
+  static const String category4 = '$_prefix/category4.PNG';
+  static const String category5 = '$_prefix/category5.PNG';
+  static const String paymentSheet = '$_prefix/sheet-payment.jpeg';
+  static const String ovoLogo = '$_prefix/ovo-logo.PNG';
+  static const String danaLogo = '$_prefix/dana-logo.PNG';
+  static const String gopayLogo = '$_prefix/gopay-logo.PNG';
+  static const String bniLogo = '$_prefix/bni-logo.PNG';
+  static const String bcaLogo = '$_prefix/bca-logo.PNG';
 }
 
 class LoremIpsum {

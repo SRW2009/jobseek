@@ -8,6 +8,7 @@ import 'package:jobseek/shared/app/widgets/form_field/text_input_controller.dart
 import 'payment_sheet.dart';
 
 class JobSeekerJobApplyController extends Controller {
+  final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final phoneController = TextEditingController();
   final resumeController = TextInputController();
@@ -27,16 +28,16 @@ class JobSeekerJobApplyController extends Controller {
   }
 
   void onSubmit(String companyName) {
-    showModalBottomSheet<void>(
-      context: getContext(),
-      backgroundColor: const Color(0xFF002248),
-      isScrollControlled: true,
-      builder: (context) {
-        return JobSeekerJobApplyPaymentSheet(
+    if (formKey.currentState?.validate()??false) {
+      showModalBottomSheet(
+        context: getContext(),
+        backgroundColor: const Color(0xFF002248),
+        isScrollControlled: true,
+        builder: (context) => JobSeekerJobApplyPaymentSheet(
           onConfirmPayment: () => _onConfirmPayment(companyName),
-        );
-      },
-    );
+        ),
+      );
+    }
   }
 
   void _onConfirmPayment(String companyName) {

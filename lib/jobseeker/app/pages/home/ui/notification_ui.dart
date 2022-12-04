@@ -30,7 +30,8 @@ class _JobSeekerUINotificationState extends State<JobSeekerHomeUINotification> {
             return SeeDetailTile(
               image: notification.detail.image,
               time: notification.notifiedAt,
-              onSeeDetail: () => widget.controller.onNavigateJobDetail(notification.detail),
+              onSeeDetail: () {},//=> widget.controller.onNavigateJobDetail(notification.detail),
+              onMore: () {},
               child: Text(
                 'You have successfully applied to the ${notification.detail.companyName}.',
                 maxLines: 2,
